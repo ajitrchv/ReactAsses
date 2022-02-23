@@ -1,28 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import AddUser from "./components/Users/AddUser";
 import UsersList from "./components/Users/UsersList";
 function App() {
+  const [usersList, setusersList] = useState([]);
+
+  const addUserHandler = (uName, uAge, uId) => {
+    console.log(uName, uAge, uId);
+    setusersList((prevUsersList) => {
+      return [...prevUsersList, { name: uName, age: uAge, key: Math.random() }];
+    });
+  };
+
   return (
     <div>
-      <AddUser></AddUser>
-      <UsersList users={[]}></UsersList>
+      <AddUser onAddUser={addUserHandler}></AddUser>
+      <UsersList users={usersList}></UsersList>
     </div>
   );
 }
 
 export default App;
-/*
-<form>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
-          { <label>Title</label> }
-          <input
-            type="text"
-            
-            placeholder="Add your text here"
-            // onChange={titleChangeHandler}
-          />
-        </div>
-      </div>
-    </form>
-*/
